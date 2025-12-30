@@ -14,16 +14,11 @@ class AuthService
 
     public function register()
     {
-        if (!isset($_POST['username'], $_POST['email'], $_POST['password'])) {
-            return;
-        }
-
         $userName = trim($_POST['username']);
         $email = trim($_POST['email']);
         $pass = password_hash($_POST['password'], PASSWORD_DEFAULT);
 
-        $stmt = $this->pdo->prepare(
-            "INSERT INTO users (username, email, password, roleid)
+        $stmt = $this->pdo->prepare("INSERT INTO users (username, email, password, roleid)
              VALUES (?, ?, ?, ?)"
         );
 
@@ -37,12 +32,7 @@ class AuthService
 
     public function login()
     {
-        if (!isset($_POST['email'], $_POST['password'])) {
-            return;
-        }
-
-        $stmt = $this->pdo->prepare(
-            "SELECT username, password, dateInscription, roleid
+        $stmt = $this->pdo->prepare("SELECT username, password, dateInscription, roleid
              FROM users WHERE email = ?"
         );
         $stmt->execute([$_POST['email']]);
@@ -78,5 +68,5 @@ $auth = new AuthService($pdo);
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $auth->register();
-    // $auth->login();
+    $auth->login();
 }
