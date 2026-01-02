@@ -27,11 +27,10 @@ class AuthService
     public function login(string $email, string $password): bool
     {
         $data = $this->userRepo->findByEmail($email);
-
         if (!$data) {
             return false;
         }
-
+        var_dump($data['statut']);
         if ($data['statut'] !== 'improve') {
             var_dump($data['statut']);
             return false;
