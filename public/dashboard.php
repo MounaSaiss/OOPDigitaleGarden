@@ -11,7 +11,7 @@ if (!isset($_SESSION["user"])) {
             <div class="mb-10 text-center lg:text-left">
                 <h1 class="text-4xl font-bold text-white"> 
                 <i class="fas fa-smile text-3xl"></i>
-                Bienvenue, <span class="text-[#98CA43]"><?=$_SESSION["user"] ?></span>
+                Bienvenue, <span class="text-[#98CA43]"><?=$_SESSION["username"] ?></span>
                 </h1>
                 <p class="text-white/70 mt-2">
                     Voici votre espace personnel Digital Garden
