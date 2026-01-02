@@ -1,3 +1,10 @@
+<?php
+session_start();
+if (!isset($_SESSION["user"])) {
+    header("Location: login.php");
+    exit;
+}
+?>
 <?php include __DIR__ . '/../includes/header.php'; ?>
 <div class="flex justify-center m-12 ">
     <div class="w-[800px] bg-white/90  p-6 rounded-2xl">

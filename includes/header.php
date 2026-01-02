@@ -17,23 +17,7 @@
                 <div class="text-xl font-semibold">
                     Digital <span class="text-[#98CA43]">Garden</span>
                 </div>
-                <div class="hidden md:flex items-center gap-8 text-sm">
-                    <a href="index.php" class="text-white/80 hover:text-[#98CA43] transition">Accueil</a>
-                    <a href="#" class="text-white/80 hover:text-[#98CA43] transition">À propos</a>
-                    <a href="#" class="text-white/80 hover:text-[#98CA43] transition">Contact</a>
-                </div>
-                <div class="hidden md:flex items-center gap-4">
-                    <a href="login.php" class="text-white/80 hover:text-white transition">
-                        Se connecter
-                    </a>
-                    <a href="inscrit.php"
-                        class="px-4 py-2 rounded-full bg-[#98CA43] text-black font-semibold hover:bg-[#86b53c] transition">
-                        S’inscrire
-                    </a>
-                </div>
-                <div class="md:hidden">
-                    <button class="text-white text-2xl">☰</button>
-                </div>
+              
             </div>
         </div>
     </nav>
