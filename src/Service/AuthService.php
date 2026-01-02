@@ -32,9 +32,10 @@ class AuthService
             return false;
         }
 
-        // if ($data['statut'] !== 'improve') {
-        //     return false;
-        // }
+        if ($data['statut'] !== 'improve') {
+            var_dump($data['statut']);
+            return false;
+        }
 
         if (!password_verify($password, $data['password'])) {
             return false;

@@ -29,15 +29,20 @@ class UserRepository
         $sql = "SELECT * FROM users WHERE email = ?";
         $stmt = $this->pdo->prepare($sql);
         $stmt->execute([$email]);
-        
+
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
         return $user;
-        
     }
 
     public function findAll()
     {
         $stmt = $this->pdo->query("SELECT id, username, email, statut, role FROM users");
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+    public function updateStatut(int $id,$statut)
+    {
+        $sql = "UPDATE users SET statut = ? WHERE id = ?";
+        $stmt = $this->pdo->prepare($sql);
+        return $stmt->execute([$statut, $id]);
     }
 }

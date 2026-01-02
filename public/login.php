@@ -26,12 +26,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $auth = new AuthService($repo);
 
         if ($auth->login($email, $password)) {
+            if ($_SESSION['role'] === 'Admin') {
+                header("Location: dashboardAdmin.php");
+            } else {
             header("Location: dashboard.php");
             exit;
-        }
+        } 
     }
-
-
+}
 }
 ?>
 <?php include __DIR__ . '/../includes/header.php'; ?>

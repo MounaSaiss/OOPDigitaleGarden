@@ -37,10 +37,10 @@ CREATE TABLE garden(
 CREATE TABLE admin(
     id INT AUTO_INCREMENT PRIMARY KEY
 );
-CREATE TABLE role (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    statu ENUM('Admin', 'Garden') NOT NULL
-);
+-- CREATE TABLE role (
+--     id INT AUTO_INCREMENT PRIMARY KEY,
+--     statu ENUM('Admin', 'Garden') NOT NULL
+-- );
 
 ALTER TABLE users
 ADD dateInscription DATETIME DEFAULT CURRENT_TIMESTAMP;
