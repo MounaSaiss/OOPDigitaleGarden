@@ -1,15 +1,15 @@
 <?php
 class Theme{
-    private int|null $id ;
+    private ?int $id ;
     private string $nom;
-    private string $badgeCleur;
-    private string $tags;
+    private string $badgeCouleur;
+    private ?string $tags;
     private int $nombersNotes;
 
-    public function __construct($id=null,$nom,$badgeCleur,$tags,$nombersNotes) {
-        $this->id = $id;
+    public function __construct(string $nom,string $badgeCouleur,$id=null,?string $tags=null,int $nombersNotes=0) {
         $this->nom=$nom;
-        $this->badgeCleur=$badgeCleur;
+        $this->badgeCouleur=$badgeCouleur;
+        $this->id = $id;
         $this->tags=$tags;
         $this->nombersNotes=$nombersNotes;
     }

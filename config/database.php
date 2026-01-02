@@ -5,14 +5,11 @@ class DatabaseConnection
 
     public function __construct(
         private $host = "localhost",
-        private $db_name = "paiement",
+        private $dbName = "gardenjardin",
         private $username = "root",
         private $password = ""
     ) {
-        $this->conn = new PDO("mysql:host=$host;dbname=$db_name", $username, $password, [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION, PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC]);
-        if (!$this->conn) {
-            die('ne pas connnection rasute');
-        }
+        $this->conn = new PDO("mysql:host=$host;dbname=$dbName", $username, $password, [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION, PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC]);
     }
 
     public function getConnection() {

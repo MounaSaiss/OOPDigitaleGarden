@@ -1,3 +1,10 @@
+<?php
+session_start();
+if (!isset($_SESSION["user"])) {
+    header("Location: login.php");
+    exit;
+}
+?>
 <?php include __DIR__ . '/../includes/header.php'; ?>
     <section class="bg-[#1F4E3A] min-h-screen py-16">
         <div class="container mx-auto px-6 lg:px-20">
@@ -9,17 +16,7 @@
                 <p class="text-white/70 mt-2">
                     Voici votre espace personnel Digital Garden
                 </p>
-            </div>
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-10">
-                <div class="bg-white rounded-3xl p-6 ">
-                    <p class="text-sm text-black-500">Date d’inscription</p>
-                    <p class="text-xl font-semibold text-black"><?= date("d F Y", strtotime($_SESSION["dateInscription"])) ?></p>
-                </div>
-                <div class="bg-white rounded-3xl p-6 ">
-                    <p class="text-sm text-black-500">Dernière connexion</p>
-                    <p class="text-xl font-semibold text-black">18:45</p>
-                </div>
-            </div>
+</br>
             <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
                 <a href="themes.php"
                     class="group bg-[#98CA43] rounded-2xl p-6 text-center font-semibold hover:scale-105">
