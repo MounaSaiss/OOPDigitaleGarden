@@ -1,72 +1,59 @@
 <?php
-require_once 'OOPDIGITALEGARDEN/config/database.php';
 
-$db = new DatabaseConnection();
-$pdo = $db->getConnection();
 class AuthService
 {
-    private PDO $pdo;
+    private UserRepository $userRepo;
 
-    public function __construct(PDO $pdo)
+    public function __construct(UserRepository $userRepo)
     {
-        $this->pdo = $pdo;
+        $this->userRepo = $userRepo;
     }
 
-    public function register()
+    public function register(string $username, string $email, string $password): bool
     {
-        $userName = trim($_POST['username']);
-        $email = trim($_POST['email']);
-        $pass = password_hash($_POST['password'], PASSWORD_DEFAULT);
+        $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
-        $stmt = $this->pdo->prepare("INSERT INTO users (username, email, password, roleid)
-             VALUES (?, ?, ?, ?)"
+        $user = new User(
+            $username,
+            $email,
+            $hashedPassword,
+            'waiting',
+            'Garden'
         );
 
-        if ($stmt->execute([$userName, $email, $pass, 2])) {
-            session_start();
-            $_SESSION['username'] = $userName;
-            header("Location: /Digital-Garden/digital-garden/dashboard.php");
-            exit;
+        return $this->userRepo->insert($user);
+    }
+
+    public function login(string $email, string $password): bool
+    {
+        $data = $this->userRepo->findByEmail($email);
+
+        if (!$data) {
+            return false;
         }
-    }
 
-    public function login()
-    {
-        $stmt = $this->pdo->prepare("SELECT username, password, dateInscription, roleid
-             FROM users WHERE email = ?"
-        );
-        $stmt->execute([$_POST['email']]);
-        $user = $stmt->fetch(PDO::FETCH_OBJ);
+        // if ($data['statut'] !== 'improve') {
+        //     return false;
+        // }
 
-        if (!$user || !password_verify($_POST['password'], $user->password)) {
-            echo "Email ou mot de passe incorrect";
-            return;
+        if (!password_verify($password, $data['password'])) {
+            return false;
         }
 
         session_start();
-        $_SESSION['username'] = $user->username;
-        $_SESSION['dateInscription'] = $user->dateInscription;
-        $_SESSION['roleid'] = $user->roleid;
 
-        header("Location: /Digital-Garden/digital-garden/dashboard.php");
-        exit;
+        $_SESSION['user_id'] = $data['id'];
+        $_SESSION['username'] = $data['username'];
+        $_SESSION['role'] = $data['role'];
+        $_SESSION['dateInscription'] = $data['dateInscription'];
+
+        return true;
     }
 
-    public function logout()
+    public static function logout(): void
     {
         session_start();
         session_unset();
         session_destroy();
-
-        header("Location: /Digital-Garden/digital-garden/login.php");
-        exit;
     }
-}
-
-
-$auth = new AuthService($pdo);
-
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $auth->register();
-    $auth->login();
 }

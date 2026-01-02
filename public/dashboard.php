@@ -1,10 +1,12 @@
-<?php include __DIR__ . '/../includes/header.php'; ?>
+<?php 
+session_start();
+include __DIR__ . '/../includes/header.php'; ?>
     <section class="bg-[#1F4E3A] min-h-screen py-16">
         <div class="container mx-auto px-6 lg:px-20">
             <div class="mb-10 text-center lg:text-left">
                 <h1 class="text-4xl font-bold text-white"> 
                 <i class="fas fa-smile text-3xl"></i>
-                Bienvenue, <span class="text-[#98CA43]"><?=$_SESSION["user"] ?></span>
+                Bienvenue, <span class="text-[#98CA43]"><?=$_SESSION["username"] ?></span>
                 </h1>
                 <p class="text-white/70 mt-2">
                     Voici votre espace personnel Digital Garden
