@@ -1,8 +1,6 @@
 <?php
-// require_once __DIR__ . '/../config/database.php';
 require_once __DIR__ . '/RepositoryInterface.php';
 require_once __DIR__ . '/../Entity/Theme.php';
-
 
 class ThemeRepository implements RepositoryInterface
 {
@@ -52,7 +50,6 @@ class ThemeRepository implements RepositoryInterface
         if ($result) {
             return new Theme( $result['nom'], $result['badgeCouleur'],$result['id'], $result['tags'], $result['total_notes']);
         }
-
         return null;
     }
     public function add(object $entity)
