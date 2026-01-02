@@ -1,3 +1,61 @@
+<?php
+session_start();
+if (!isset($_SESSION["user"])) {
+    header("Location: login.php");
+    exit;
+}
+
+require_once __DIR__ . '/../config/database.php';
+require_once __DIR__ . '/../src/Repository/NoteRepository.php';
+require_once __DIR__ . '/../src/Entity/Note.php';
+require_once __DIR__ . '/../src/Repository/ThemeRepository.php';
+
+$db = new DatabaseConnection();
+$conn = $db->getConnection();
+
+$noteRepo = new NoteRepository($conn, $_SESSION['user_id']);
+$themeRepo = new ThemeRepository($conn, $_SESSION['user_id']);
+$themes = $themeRepo->findAll();
+
+
+if (isset($_POST['ajoute'])) {
+    $note = new Note(
+        null,
+        $_POST['titre'],
+        $_POST['importance'],
+        $_POST['contenu'],
+        new DateTime(),
+        $_POST['theme']
+    );
+
+    $noteRepo->add($note);
+    header("Location: notes.php");
+    exit;
+
+}
+$note = null; 
+if (isset($_POST['edit'])) {
+    $noteId = $_POST['note_id'];
+    $note = $noteRepo->find($noteId);
+}
+
+if (isset($_POST['update'])) {
+    $note = new Note(
+        $_POST['note_id'],          
+        $_POST['titre'],            
+        $_POST['importance'],       
+        $_POST['contenu'],          
+        new DateTime(),             
+        $_POST['theme']             
+    );
+
+    $noteRepo->update($note);       
+    header("Location: notes.php");
+    exit;
+}
+
+
+?>
 <?php include __DIR__ . '/../includes/header.php'; ?>
 <div class="flex justify-center m-12 ">
     <div class="w-[800px] bg-white/90  p-6 rounded-2xl">
@@ -12,7 +70,7 @@
                 </label>
                 <select class="border border-[#98CA43] p-2 rounded-lg focus:ring-2 focus:ring-[#4DC2C3]" name="theme" required>
                     <?php foreach ($themes as $theme): ?>
-                        <option value="<?= $theme['id'] ?>"><?= $theme['nom'] ?></option>
+                        <option value="<?= $theme->id ?? '' ?>"><?= $theme->nom ?? '' ?></option>
                     <?php endforeach; ?>
                 </select>
             </div>

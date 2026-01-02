@@ -17,7 +17,7 @@
                     </div>
                 </div>
                 <div class="flex gap-6 text-sm">
-                    <a href="#" class="text-white/70 hover:text-[#98CA43] transition">Accueil</a>
+                    <a href="index.php" class="text-white/70 hover:text-[#98CA43] transition">Accueil</a>
                     <a href="#" class="text-white/70 hover:text-[#98CA43] transition">À propos</a>
                     <a href="#" class="text-white/70 hover:text-[#98CA43] transition">Contact</a>
                 </div>
