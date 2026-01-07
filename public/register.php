@@ -86,3 +86,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </section>
 
 <?php include __DIR__ . '/../includes/footer.php'; ?>
+

@@ -1,6 +1,7 @@
+<?php include __DIR__. '/../includes/header.php'; ?>
 <section class="p-8 bg-[#1F4E3A] min-h-screen">
     <a href="formThemes.php" class="flex-1 bg-green-500 text-white py-1 rounded-lg  p-2 ">
-        Add new thémes
+        Add new thémes                                                                                                       b  
     </a>
     <h2 class="text-3xl font-bold mb-6 text-white mt-3">Liste des thèmes</h2>
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
