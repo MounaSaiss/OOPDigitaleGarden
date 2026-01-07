@@ -25,6 +25,7 @@ if (isset($_POST['ajouter'])) {
     $themeRepo->add($theme);
     header('Location: themes.php');
     exit;
+    
 }
 
 $theme = null;
