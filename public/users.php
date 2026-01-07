@@ -1,15 +1,16 @@
 <?php
 session_start();
+if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'Admin') {
+    header('Location: login.php');
+    exit;
+}
 
 require_once __DIR__ . '/../config/database.php';
 require_once __DIR__ . '/../src/Repository/UserRepository.php';
-
 $db = new DatabaseConnection();
 $pdo = $db->getConnection();
-
 $repo = new UserRepository($pdo);
 $users = $repo->findAll();
-
 include __DIR__ . '/../includes/header.php';
 ?>
 
@@ -39,10 +40,8 @@ include __DIR__ . '/../includes/header.php';
                         </tr>
                     <?php endif; ?>
                 <?php endforeach; ?>
-
             </tbody>
         </table>
-
         <a href="dashboardAdmin.php" class="inline-block mt-6 text-white underline">
             ← Retour au dashboard admin
         </a>

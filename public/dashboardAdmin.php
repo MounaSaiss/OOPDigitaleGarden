@@ -33,7 +33,9 @@
                 <i class="fas fa-right-from-bracket text-2xl"></i>
                 <p class="mt-2 text-lg">Déconnexion</p>
             </a>
-
+        <a href="login.php" class="inline-block mt-6 text-white underline">
+            ← Retour au login
+        </a>
         </div>
 
     </div>

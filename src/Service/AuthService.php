@@ -17,8 +17,6 @@ class AuthService
             $username,
             $email,
             $hashedPassword,
-            'waiting',
-            'Garden'
         );
 
         return $this->userRepo->insert($user);
@@ -26,25 +24,27 @@ class AuthService
 
     public function login(string $email, string $password)
     {
-        $data = $this->userRepo->findByEmail($email);
-        if (!$data) {
+        $userData = $this->userRepo->findByEmail($email);
+        if (!$userData) {
             return false;
         }
-        if ($data['statut'] !== 'improve') {
+        if ($userData['statut'] !== 'improve') {
             return false;
         }
 
-        if (!password_verify($password, $data['password'])) {
+        if (!password_verify($password, $userData['password'])) {
             return false;
         }
 
         session_start();
 
-        $_SESSION['user_id'] = $data['id'];
-        $_SESSION['username'] = $data['username'];
-        $_SESSION['role'] = $data['role'];
-        $_SESSION['dateInscription'] = $data['dateInscription'];
-
+        $_SESSION['user_id'] = $userData['id'];
+        $_SESSION['username'] = $userData['username'];
+        $_SESSION['email'] = $userData['email'];
+        $_SESSION['role'] = $userData['role'];
+        $_SESSION['statut'] = $userData['statut'];
+        $_SESSION['dateInscription'] = $userData['dateInscription'] ?? null;
+        $_SESSION['logged_in'] = true;
         return true;
     }
 
@@ -54,5 +54,19 @@ class AuthService
         session_unset();
         session_destroy();
     }
-}
+    public static function isAuthenticated(): bool
+    {
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
+        return isset($_SESSION['logged_in']) && $_SESSION['logged_in'] === true;
+    }
 
+    public static function isAdmin(): bool
+    {
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
+        return isset($_SESSION['role']) && $_SESSION['role'] === 'Admin';
+    }
+}

@@ -1,6 +1,9 @@
 <?php
 session_start();
-
+if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'Admin') {
+    header('Location: login.php');
+    exit;
+}
 require_once __DIR__ . '/../config/database.php';
 require_once __DIR__ . '/../src/Repository/UserRepository.php';
 
@@ -9,18 +12,21 @@ $db = new DatabaseConnection();
 $pdo = $db->getConnection();
 $repo = new UserRepository($pdo);
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-
-    $id = $_POST['id'];
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['id'], $_POST['action'])) {
+    $id = (int)$_POST['id'];
     $action = $_POST['action'];
-
     if ($action === 'validate') {
         $repo->updateStatut($id, 'improve');
+        $_SESSION['message'] = "Utilisateur validé avec succès";
+        $_SESSION['message_type'] = "success";
     }
-
     if ($action === 'block') {
         $repo->updateStatut($id, 'block');
+        $_SESSION['message'] = "Utilisateur bloqué avec succès";
+        $_SESSION['message_type'] = "success";
     }
+    header('Location: ' . $_SERVER['PHP_SELF']);
+    exit;
 }
 
 $users = $repo->findAll();

@@ -1,9 +1,9 @@
 <?php
 session_start();
-// if (!isset($_SESSION["user"])) {
-//     header("Location: login.php");
-//     exit;
-// }
+if (!isset($_SESSION["user"])) {
+    header("Location: login.php");
+    exit;
+}
 ?>
 <?php include __DIR__ . '/../includes/header.php'; ?>
     <section class="bg-[#1F4E3A] min-h-screen py-16">

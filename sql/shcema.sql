@@ -54,9 +54,12 @@ ADD dateInscription DATETIME DEFAULT CURRENT_TIMESTAMP;
 ALTER TABLE note ADD COLUMN etat  ENUM('active', 'archived') NOT NULL ;
 ALTER TABLE note ADD COLUMN favori VARCHAR(25) NOT NULL ;
 
-
-
-
-
-
+DESCRIBE Signalement;
+ALTER TABLE signalement
+ADD COLUMN id_note INT NULL,
+ADD FOREIGN KEY (id_note) REFERENCES note(id) ON DELETE SET NULL,
+ADD COLUMN id_user INT NULL,
+ADD FOREIGN KEY (id_user) REFERENCES users(id) ON DELETE SET NULL,
+ADD COLUMN id_user_reported INT NULL,
+ADD FOREIGN KEY (id_user_reported) REFERENCES users(id) ON DELETE SET NULL
 
