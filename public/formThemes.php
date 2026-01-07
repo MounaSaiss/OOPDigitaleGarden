@@ -5,10 +5,10 @@ require_once __DIR__ . '/../config/database.php';
 require_once __DIR__ . '/../src/Entity/Theme.php';
 require_once __DIR__ . '/../src/Repository/ThemeRepository.php';
 
-if(!isset($_SESSION['user_id'])){
-    header("Location : login.php ");
-    exit;
-}
+// if(!isset($_SESSION['user_id'])){
+//     header("Location : login.php ");
+//     exit;
+// }
 
 $db=new DatabaseConnection();
 $conn=$db->getConnection();
@@ -25,6 +25,7 @@ if (isset($_POST['ajouter'])) {
     $themeRepo->add($theme);
     header('Location: themes.php');
     exit;
+    
 }
 
 $theme = null;

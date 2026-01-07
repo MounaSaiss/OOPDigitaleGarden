@@ -3,10 +3,10 @@ session_start();
 require_once __DIR__ . '/../config/database.php';
 require_once __DIR__ .'/../src/Repository/ThemeRepository.php';
 
-if (!isset($_SESSION["user"])) {
-    header("Location: login.php");
-    exit;
-}
+// if (!isset($_SESSION["user"])) {
+//     header("Location: login.php");
+//     exit;
+// }
 
 $db=new DatabaseConnection();
 $conn=$db->getConnection();
