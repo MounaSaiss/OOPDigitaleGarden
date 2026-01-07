@@ -9,7 +9,7 @@ class AuthService
         $this->userRepo = $userRepo;
     }
 
-    public function register(string $username, string $email, string $password): bool
+    public function register(string $username, string $email, string $password)
     {
         $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
@@ -24,15 +24,13 @@ class AuthService
         return $this->userRepo->insert($user);
     }
 
-    public function login(string $email, string $password): bool
+    public function login(string $email, string $password)
     {
         $data = $this->userRepo->findByEmail($email);
         if (!$data) {
             return false;
         }
-        var_dump($data['statut']);
         if ($data['statut'] !== 'improve') {
-            var_dump($data['statut']);
             return false;
         }
 
@@ -57,3 +55,4 @@ class AuthService
         session_destroy();
     }
 }
+

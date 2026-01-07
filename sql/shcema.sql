@@ -50,3 +50,4 @@ ADD dateInscription DATETIME DEFAULT CURRENT_TIMESTAMP;
 
 
 
+
