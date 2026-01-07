@@ -1,4 +1,4 @@
--- Active: 1765795560643@@127.0.0.1@3306@gardenjardin
+-- Active: 1765832433223@@localhost@3306@gardenjardin
 CREATE DATABASE GardenJardin;
 USE  GardenJardin;
 CREATE TABLE  users (
@@ -27,6 +27,12 @@ CREATE TABLE note (
     id_theme INT NOT NULL ,
     FOREIGN KEY(id_theme) REFERENCES theme(id)
 );
+CREATE TABLE Signalement(
+    id int AUTO_INCREMENT PRIMARY KEY,
+    type VARCHAR(50) NOT NULL,
+    raison VARCHAR(50) NOT NULL,
+    statut ENUM('waiting', 'accepted', 'refused') NOT NULL
+);
 
 ALTER TABLE users
 ADD confirm_password VARCHAR(255) AFTER password ;
@@ -37,13 +43,16 @@ CREATE TABLE garden(
 CREATE TABLE admin(
     id INT AUTO_INCREMENT PRIMARY KEY
 );
--- CREATE TABLE role (
---     id INT AUTO_INCREMENT PRIMARY KEY,
---     statu ENUM('Admin', 'Garden') NOT NULL
--- );
+CREATE TABLE role (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    statu ENUM('Admin', 'Garden') NOT NULL
+);
 
 ALTER TABLE users
 ADD dateInscription DATETIME DEFAULT CURRENT_TIMESTAMP;
+
+ALTER TABLE note ADD COLUMN etat  ENUM('active', 'archived') NOT NULL ;
+ALTER TABLE note ADD COLUMN favori VARCHAR(25) NOT NULL ;
 
 
 
