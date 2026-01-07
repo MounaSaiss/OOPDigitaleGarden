@@ -5,5 +5,5 @@ interface RepositoryInterface{
     public function find(int $id);
     public function add(object $entity);
     public function update(object $entity);
-    public function delete(object $entity);
+    public function delete(int $id);
 }
