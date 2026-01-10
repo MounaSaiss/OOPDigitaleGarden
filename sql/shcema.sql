@@ -63,3 +63,12 @@ ADD FOREIGN KEY (id_user) REFERENCES users(id) ON DELETE SET NULL,
 ADD COLUMN id_user_reported INT NULL,
 ADD FOREIGN KEY (id_user_reported) REFERENCES users(id) ON DELETE SET NULL
 
+USE GardenJardin;
+
+-- Insérer des données avec répartition égale des 3 statuts
+INSERT INTO Signalement (type, raison, statut, id_note, id_user, id_user_reported) VALUES
+-- Statut: 'waiting' (en attente)
+('note', 'Contenu violent', 'waiting', 1, 2, NULL),
+('user', 'Harcèlement', 'waiting', NULL, 3, 4),
+('note', 'Spam commercial', 'waiting', 2, 5, NULL),
+('user', 'Comportement abusif', 'waiting', NULL, 6, 7)

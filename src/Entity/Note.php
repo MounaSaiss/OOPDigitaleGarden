@@ -8,7 +8,7 @@ class Note{
     private int $id_theme;
     private ?string $theme ;
     private ?string $color;
-
+    
     public function __construct($id=null,$titre,$importance,$contenu,$dateCreation,$id_theme,$theme=null,$color=null) {
         $this->id = $id;
         $this->titre=$titre;

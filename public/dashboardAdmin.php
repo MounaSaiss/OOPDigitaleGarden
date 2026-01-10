@@ -26,7 +26,13 @@
                 <i class="fas fa-user-check text-2xl"></i>
                 <p class="mt-2 text-lg">Valider / Bloquer comptes</p>
             </a>
-
+            <!-- Signialement -->
+            <a href="signalements.php"
+                class="group bg-orange-500 rounded-2xl p-6 text-center font-semibold text-[#1F4E3A] hover:scale-105 transition">
+                <i class="fas fa-user-check text-2xl"></i>
+                <p class="mt-2 text-lg">Signalement</p>
+            </a>
+            
             <!-- Logout -->
             <a href="logout.php"
                 class="group bg-red-500 rounded-2xl p-6 text-center font-semibold text-white hover:scale-105 transition">
